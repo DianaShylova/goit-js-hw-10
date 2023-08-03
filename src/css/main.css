@@ -4,10 +4,33 @@ body{
 }
 
 .cat-info {
-    text-align: center;
-    color: goldenrod;
-    background-color: cornflowerblue;
+    
+    color: #CC0000;
+    background-color: #FFCC99;
+    font-family: 'Patrick Hand', cursive;
+    font-style: italic;
+    text-align: justify;
+    font-size: 27px;
 }
+
+.cat__img{
+    width: 100%;
+}
+
+.cat__name{
+    text-align: center;
+    color: #CC0000
+    font-family: 'Patrick Hand', cursive;
+    font-style: italic;
+    max-width: 1200px;
+    margin-top: 50px;
+}
+
+.cat__description,.cat__temperament{
+padding: 15px;
+}
+
+
 
 .loader {
     width: 48px;

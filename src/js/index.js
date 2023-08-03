@@ -12,29 +12,37 @@ const refs = {
   load: document.querySelector('.loader')
 };
 
-console.log(fetchBreeds().then());
-
 fetchBreeds()
-  .then(res => {
-    renderMarkup(res.data);
+  .then(breeds => {
+    renderMarkup(breeds);
     new SlimSelect({
       select: '.breed-select',
     });
     refs.selectEl.classList.remove('is-hidden');
   })
-    .catch(error => {
-    Notiflix.Notify.failure('Oops! Something went wrong! Try reloading the page!');
+  .catch(error => {
+      console.log(error);
+      Notiflix.Notify.failure(
+        'Oops! Something went wrong! Try reloading the page!'
+      );
     refs.errorEl.classList.remove('is-hidden');
   })
     .finally(() => refs.load.classList.add('is-hidden'));
   
    function createMarkup(array){
-  const markup = array.map(({id, name})=>{
+     const markup = array
+       .map(({ id, name }) => {
   return `<option value="${id}">${name}</option>`;
-  }).join("")
+       })
+       .join("")
   return markup;
    }
 
+function renderMarkup(array) {
+  const markup = createMarkup(array);
+  refs.selectEl.innerHTML = markup;
+
+   }
 refs.selectEl.addEventListener('change', onSelectChange)
  
 function onSelectChange(e){
@@ -47,7 +55,7 @@ function onSelectChange(e){
  
     fetchCatByBreed(userValue)
 .then(res => {
-    renderCatMarkup(res.data[0]);
+    renderCatMarkup(res[0]);
   })
 .catch(() => {
     Notiflix.Notify.failure(
@@ -62,10 +70,10 @@ function onSelectChange(e){
 }
 
 function createCatMarkup(data) {
-  const catInfo = data.breeds[0]
+  const catInfo = data.breeds[0];
   const { name, description, temperament } = catInfo;
   console.log(catInfo);
-  return `<img src="${data.url}" alt="${name}" class = "cat__img"><h2 class = "cat__name">${name}</h2><p class = "cat__description">${description}</p><p class = cat__temperament>${temperament}</p>`;
+  return `<img src="${data.url}" alt="${name}" class = "cat__img"><h2 class = "cat__name">${name}</h2><p class = "cat__description">${description}</p><p class = "cat__temperament">${temperament}</p>`;
 }
 
 function renderCatMarkup(data){

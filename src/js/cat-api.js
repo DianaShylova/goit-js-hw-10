@@ -21,7 +21,7 @@ export function fetchBreeds() {
 }
 
 export function fetchCatByBreed(breedId) {
-    return fetch(`${SEARCH_URL}?breed_Ids=${breedId}&api_key=${API_KEY}`)
+    return fetch(`${SEARCH_URL}?breed_ids=${breedId}&api_key=${API_KEY}`)
         .then(res => {
             if (!res.ok) {
                 throw new Error('Oops! Something went wrong! Try reloading the page!')
